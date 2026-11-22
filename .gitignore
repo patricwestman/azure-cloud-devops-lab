@@ -1,0 +1,15 @@
+# Generated ARM templates and parameter files
+main.json
+parameters/*json
+
+# Local Azure and Development files
+.azure/
+.vscode/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Environment files and secrets
+.env
+.env.*
