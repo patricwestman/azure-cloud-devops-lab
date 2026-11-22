@@ -1,0 +1,35 @@
+name: Bicep CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate-bicep:
+    name: Validate Bicep
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Azure CLI and Bicep
+        run: |
+          az version
+          az bicep version
+
+      - name: Lint Bicep
+        run: az bicep lint --file main.bicep
+
+      - name: Build Bicep
+        run: az bicep build --file main.bicep --stdout > /dev/null
+
+      - name: Validate dev parameters
+        run: az bicep build-params --file parameters/dev.bicepparam --stdout > /dev/null
+
+      - name: Validate prod parameters
+        run: az bicep build-params --file parameters/prod.bicepparam --stdout > /dev/null
