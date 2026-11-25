@@ -2,7 +2,7 @@ param location string
 param environment string
 param projectName string
 
-var storageAccountName = 'st${projectName}${environment}2026'
+var storageAccountName = 'st${environment}${uniqueString(resourceGroup().id, projectName, environment)}'
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   name: storageAccountName
