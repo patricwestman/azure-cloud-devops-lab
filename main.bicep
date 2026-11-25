@@ -1,4 +1,9 @@
 param location string
+@description('Deployment environment')
+@allowed([
+    'dev'
+    'prod'
+])
 param environment string
 param projectName string
 @description('SSH public key for the backend VM')
