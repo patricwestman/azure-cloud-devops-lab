@@ -43,6 +43,9 @@ resource backendVm 'Microsoft.Compute/virtualMachines@2024-07-01' = {
     hardwareProfile: {
       vmSize: 'Standard_B2s_V2'
     }
+    securityProfile: {
+      encryptionAtHost: true
+    }
     storageProfile: {
       imageReference: {
         publisher: 'Canonical'
