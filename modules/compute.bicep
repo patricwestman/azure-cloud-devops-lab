@@ -64,6 +64,7 @@ resource backendVm 'Microsoft.Compute/virtualMachines@2024-07-01' = {
     osProfile: {
       computerName: 'backend-${environment}'
       adminUsername: adminUsername
+      allowExtensionOperations: false
       linuxConfiguration: {
         disablePasswordAuthentication: true
         ssh: {
