@@ -1,14 +1,19 @@
 param location string
+@description('Deployment environment')
+@allowed([
+  'dev'
+  'prod'
+])
 param environment string
 param projectName string
 
-var storageAccountName = 'st${projectName}${environment}2026'
+var storageAccountName = 'st${environment}${uniqueString(resourceGroup().id, projectName, environment)}'
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   name: storageAccountName
   location: location
   sku: {
-    name: 'Standard_LRS'
+    name: 'Standard_GRS'
   }
   kind: 'StorageV2'
   tags: {
@@ -19,6 +24,10 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
     supportsHttpsTrafficOnly: true
     minimumTlsVersion: 'TLS1_2'
     allowBlobPublicAccess: false
+    networkAcls: {
+      defaultAction: 'Deny'
+      bypass: 'AzureServices'
+    }
   }
 }
 
