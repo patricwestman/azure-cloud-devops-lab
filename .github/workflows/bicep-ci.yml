@@ -37,7 +37,7 @@ jobs:
         run: python -m pip install checkov==3.4.11
 
       - name: Checkov Security Scan
-        run: checkov --framework arm --file main.json
+        run: checkov --framework arm --file main.json --config-file .checkov.yml
 
       - name: Validate dev parameters
         run: az bicep build-params --file parameters/dev.bicepparam --stdout > /dev/null

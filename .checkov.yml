@@ -1,0 +1,9 @@
+# CKV_AZURE_43:
+# Checkov 3.4.11 cannot validate our unresolved ARM naming expression.
+# Storage account names are generated using uniqueString().
+# Environment values are restricted to dev and prod.
+# Naming format has been reviewed independently.
+# Global name availability must be verified before deployment.
+
+skip-check:
+  - CKV_AZURE_43
